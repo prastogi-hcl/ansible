@@ -11,7 +11,7 @@
     - name: Print version
       debug:
         var: junos.fqdn
-    - name: Run RPC Commands
+    - name: Run Junos Commands
       juniper_junos_command:
        commands="show security dynamic-vpn users"
        format=text

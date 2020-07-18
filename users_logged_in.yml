@@ -1,6 +1,6 @@
 ---
 - name: Get system users currently logged in
-  hosts: dc1
+  hosts: Juniper
   connection: local
   gather_facts: no
   roles:

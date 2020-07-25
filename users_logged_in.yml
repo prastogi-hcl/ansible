@@ -15,4 +15,4 @@
       juniper_junos_command:
        commands="show security dynamic-vpn users"
        format=text
-       dest=/home/ansible/{{ junos.fqdn }}.output
+       dest=/opt/result_users_login/{{ junos.fqdn }}.output

@@ -6,13 +6,20 @@
   roles:
    - juniper.junos
   tasks:
+    - name: Get timestamp from the system, include the first 5 nanoseconds digits
+      shell: "date +%Y-%m-%d%H-%M-%S"
+      register: tstamp
+    - name: Set variables
+      set_fact:
+        cur_date: "{{ tstamp.stdout[0:10]}}"
+        cur_time: "{{ tstamp.stdout[10:]}}"
     - name: Retrieve facts from device running Junos OS
       juniper_junos_facts:
     - name: Print version
       debug:
         var: junos.fqdn
-    - name: Run Junos Commands
+    - name: Run RPC Commands
       juniper_junos_command:
        commands="show security dynamic-vpn users"
        format=text
-       dest=/opt/result_users_login/{{ junos.fqdn }}.output
+       dest="{{ junos.fqdn }}.{{ cur_date }}.{{ cur_time }}.output"

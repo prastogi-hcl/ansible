@@ -22,4 +22,4 @@
       juniper_junos_command:
        commands="show security dynamic-vpn users"
        format=text
-       dest="{{ junos.fqdn }}.{{ cur_date }}.{{ cur_time }}.output"
+       dest="/opt/result_users_login/{{ junos.fqdn }}.{{ cur_date }}.{{ cur_time }}.output"

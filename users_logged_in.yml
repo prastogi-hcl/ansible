@@ -20,6 +20,6 @@
         var: junos.fqdn
     - name: Run RPC Commands
       juniper_junos_command:
-       commands="show security dynamic-vpn users terse"
+       commands="show security dynamic-vpn users"
        format=text
        dest="/opt/result_users_login/{{ junos.fqdn }}.{{ cur_date }}.{{ cur_time }}.output"

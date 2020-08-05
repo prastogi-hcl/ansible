@@ -7,7 +7,7 @@
    - juniper.junos
   tasks:
     - name: Get timestamp from the system, include the first 5 nanoseconds digits
-      shell: "date +%Y-%m-%d%H-%M-%S"
+      shell: "date +%Y-%m-%d%H-%M"
       register: tstamp
     - name: Set variables
       set_fact:
@@ -22,4 +22,6 @@
       juniper_junos_command:
        commands="show security dynamic-vpn users"
        format=text
-       dest="/opt/result_users_login/{{ junos.fqdn }}.{{ cur_date }}.{{ cur_time }}.output"
+       dest="{{ junos.fqdn }}.output"
+    - name: Search string
+      shell: "grep -i 'Remote IP' {{ junos.fqdn }}.output  >> /opt/result_users_login/{{ junos.fqdn }}.{{ cur_date }}.{{ cur_time }}.output"

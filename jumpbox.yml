@@ -15,6 +15,7 @@
     vcenter_pass: "Fri@co123!"
     datacenter_name: "FRISCO-DC"
     cluster_name: "Anthos-vSAN-Cluster"
+    template: "anthos-pre-jump"
   tasks:
   - name: Clone the template
     vmware_guest:
@@ -23,7 +24,7 @@
       password: "{{ vcenter_pass }}"
       validate_certs: False
       name: "{{ vm_name }}"
-      template: "{{ anthos-pre-jump }}"
+      template: "{{ template }}"
       datacenter: "{{ datacenter_name }}"
       folder: /{{ datacenter_name }}/vm
       cluster: "{{ cluster_name }}"

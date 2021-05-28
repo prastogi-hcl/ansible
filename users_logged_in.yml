@@ -24,4 +24,4 @@
        format=text
        dest="{{ junos.fqdn }}.output"
     - name: Search string
-      shell: "grep -i 'Remote IP' {{ junos.fqdn }}.output  >> /opt/result_users_login/{{ junos.fqdn }}.{{ cur_date }}.{{ cur_time }}.output"
+      shell: "grep -E 'Remote IP|IKE ID' {{ junos.fqdn }}.output  >> /opt/result_users_login/{{ junos.fqdn }}.{{ cur_date }}.{{ cur_time }}.output"

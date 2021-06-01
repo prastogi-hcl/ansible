@@ -1,0 +1,20 @@
+---
+- name: Get system users currently logged in
+  hosts: LONDON
+  connection: local
+  gather_facts: no
+  roles:
+   - juniper.junos
+  tasks:
+    - name: Retrieve facts from device running Junos OS
+      juniper_junos_facts:
+    - name: Print version
+      debug:
+        var: junos.fqdn
+    - name: Run RPC Commands
+      juniper_junos_command:
+       commands="show arp"
+       format=text
+       dest="{{ junos.fqdn }}.output"
+    - name: Search string
+      shell: "awk '{ print $2,$4 }' {{ junos.fqdn }}.output  >> /opt/ip_show/{{ junos.fqdn }}.output"

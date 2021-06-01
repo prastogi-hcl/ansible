@@ -1,6 +1,6 @@
 ---
 - name: Get system users currently logged in
-  hosts: LONDON
+  hosts: all
   connection: local
   gather_facts: no
   roles:

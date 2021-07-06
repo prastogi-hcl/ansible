@@ -43,7 +43,7 @@
          username: "6235b3d0e139135950f352c4d142dbfa"
          password: "530ba0c37a25fc4d1ca3014d567fb56c"
          from: "administrator@hclcnlabs.com"
-         to: " parikshit.r@hcl.com , ikumareson@hcl.com "
+         to: " parikshit.r@hcl.com "
          subject: "FRISCO VPN Reachable"
          body: "Frisco vpn i.e. {{ junos.fqdn }} is up & running fine"
       delegate_to: localhost

@@ -1,0 +1,50 @@
+-----
+- name: Check availability status for London
+  hosts: LONDON
+  roles:
+    - juniper.junos
+  connection: local
+  gather_facts: no
+  tasks:
+    - name: Get timestamp from the system, include the first 5 nanoseconds digits
+      shell: "date +%Y-%m-%d%H-%M"
+      register: tstamp
+    - name: Set variables
+      set_fact:
+        cur_date: "{{ tstamp.stdout[0:10]}}"
+        cur_time: "{{ tstamp.stdout[10:]}}"
+    - name: Retrieve facts from device running Junos OS
+      juniper_junos_facts:
+    - name: Print version
+      debug:
+        var: junos.fqdn
+    - name: Use the variable in conditional statement
+      shell: echo "London vpn unreachable.Please Check!!!"
+      when: junos.fqdn != "LON-SRX340-EDGEGW01.hclcnlabs.com"
+    - name: Send Email
+      mail:
+         host: "in-v3.mailjet.com"
+         port: 587
+         username: "6235b3d0e139135950f352c4d142dbfa"
+         password: "530ba0c37a25fc4d1ca3014d567fb56c"
+         from: "administrator@hclcnlabs.com"
+         to: " parikshit.r@hcl.com "
+         subject: "WARNING!!!!LONDON VPN Unreachable.Please Check!!!!"
+         body: "London vpn i.e. {{ junos.fqdn }} is down, since {{ cur_date }}.{{ cur_time }}.Please check!!!"
+      delegate_to: localhost
+      when: junos.fqdn != "LON-SRX340-EDGEGW01.hclcnlabs.com"
+    - name: Use the variable in conditional statement
+      shell: echo "London VPN is reachable"
+      when: junos.fqdn == "LON-SRX340-EDGEGW01.hclcnlabs.com"
+    - name: Send Email
+      mail:
+         host: "in-v3.mailjet.com"
+         port: 587
+         username: "6235b3d0e139135950f352c4d142dbfa"
+         password: "530ba0c37a25fc4d1ca3014d567fb56c"
+         from: "administrator@hclcnlabs.com"
+         to: " parikshit.r@hcl.com , ikumareson@hcl.com , paul.chalmers@hcl.com , antonio.coelho@hcl.com "
+         subject: "LONDON VPN Reachable"
+         body: "London vpn i.e. {{ junos.fqdn }} is up & running fine"
+      delegate_to: localhost
+      when: junos.fqdn == "LON-SRX340-EDGEGW01.hclcnlabs.com"

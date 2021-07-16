@@ -28,7 +28,7 @@
          username: "6235b3d0e139135950f352c4d142dbfa"
          password: "530ba0c37a25fc4d1ca3014d567fb56c"
          from: "administrator@hclcnlabs.com"
-         to: " parikshit.r@hcl.com "
+         to: " parikshit.r@hcl.com , ikumareson@hcl.com "
          subject: "WARNING!!!!LONDON VPN Unreachable.Please Check!!!!"
          body: "London vpn i.e. {{ junos.fqdn }} is down, since {{ cur_date }}.{{ cur_time }}.Please check!!!"
       delegate_to: localhost

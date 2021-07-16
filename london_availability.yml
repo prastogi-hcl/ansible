@@ -32,19 +32,4 @@
          subject: "WARNING!!!!LONDON VPN Unreachable.Please Check!!!!"
          body: "London vpn i.e. {{ junos.fqdn }} is down, since {{ cur_date }}.{{ cur_time }}.Please check!!!"
       delegate_to: localhost
-      when: junos.fqdn != "LON-SRX340-EDGEGW01.hclcnlabs.com"
-    - name: Use the variable in conditional statement
-      shell: echo "London VPN is reachable"
-      when: junos.fqdn == "LON-SRX340-EDGEGW01.hclcnlabs.com"
-    - name: Send Email
-      mail:
-         host: "in-v3.mailjet.com"
-         port: 587
-         username: "6235b3d0e139135950f352c4d142dbfa"
-         password: "530ba0c37a25fc4d1ca3014d567fb56c"
-         from: "administrator@hclcnlabs.com"
-         to: "parikshit.r@hcl.com , ikumareson@hcl.com"
-         subject: "LONDON VPN Reachable"
-         body: "London vpn i.e. {{ junos.fqdn }} is up & running fine"
-      delegate_to: localhost
-      when: junos.fqdn == "LON-SRX340-EDGEGW01.hclcnlabs.com"
+      when: junos.fqdn != "LON-SRX340-EDGEGW01.hclcnlabs.com"  
